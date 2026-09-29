@@ -1,0 +1,46 @@
+---
+import { getCollection, render } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BlogLayout title={`${post.data.title} — Kritika Goyal`} description={post.data.description}>
+  <article class="space-y-8">
+    <div class="space-y-3 border-b border-theme pb-6">
+      <div class="text-xs font-mono c-muted flex items-center gap-2">
+        <time>
+          {post.data.pubDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          })}
+        </time>
+        {post.data.tags && post.data.tags.length > 0 && (
+          <>
+            <span>•</span>
+            <span>{post.data.tags.join(', ')}</span>
+          </>
+        )}
+      </div>
+
+      <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight c-primary">
+        {post.data.title}
+      </h1>
+    </div>
+
+    <!-- Article Content -->
+    <div class="c-secondary space-y-4 text-sm leading-relaxed">
+      <Content />
+    </div>
+  </article>
+</BlogLayout>
