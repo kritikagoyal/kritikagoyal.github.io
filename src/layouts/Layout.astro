@@ -9,13 +9,22 @@ const { title = "Kritika Goyal" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+
+    <script is:inline>
+      const theme = localStorage.getItem('theme');
+      if (theme === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
   </head>
-  <body class="flex flex-col min-h-screen justify-between max-w-3xl mx-auto px-6 py-12 text-zinc-300 font-mono antialiased selection:bg-orange-500/25 selection:text-orange-400">
+  <body class="flex flex-col h-screen justify-between max-w-3xl mx-auto px-6 py-8 font-mono antialiased selection:bg-orange-500/25 selection:text-orange-500 overflow-hidden">
     <slot />
   </body>
 </html>

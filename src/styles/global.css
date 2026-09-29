@@ -1,7 +1,82 @@
 @import "tailwindcss";
 
+:root {
+  /* Light Mode Palette */
+  --bg-color: #fafafa;
+  --dot-color: rgba(0, 0, 0, 0.08);
+
+  /* Typography */
+  --text-primary: #18181b;     /* High contrast charcoal (zinc-900) */
+  --text-secondary: #3f3f46;   /* Readable body text (zinc-700) */
+  --text-muted: #71717a;       /* Meta/proof items (zinc-500) */
+  --text-accent: #ea580c;      /* Deep vibrant orange (orange-600) */
+
+  /* Surfaces & Borders */
+  --surface-btn: #f4f4f5;      /* Clean off-white button surface (zinc-100) */
+  --surface-btn-hover: #e4e4e7;/* (zinc-200) */
+  --btn-border: #d4d4d8;       /* Subtle button border (zinc-300) */
+  --divider: #e4e4e7;          /* (zinc-200) */
+
+  /* Resume Accent Button */
+  --resume-bg: rgba(234, 88, 12, 0.1);
+  --resume-border: rgba(234, 88, 12, 0.35);
+  --resume-text: #c2410c;      /* Accessible orange text (orange-700) */
+}
+
+html.dark {
+  /* Dark Mode Palette */
+  --bg-color: #0c0d0e;
+  --dot-color: rgba(255, 255, 255, 0.08);
+
+  /* Typography */
+  --text-primary: #f4f4f5;     /* Crisp white (zinc-100) */
+  --text-secondary: #a1a1aa;   /* Soft grey (zinc-400) */
+  --text-muted: #71717a;       /* Meta/proof items (zinc-500) */
+  --text-accent: #f97316;      /* Bright orange (orange-500) */
+
+  /* Surfaces & Borders */
+  --surface-btn: rgba(24, 24, 27, 0.7);  /* Dark charcoal (zinc-900/70) */
+  --surface-btn-hover: #27272a;          /* (zinc-800) */
+  --btn-border: #27272a;                 /* (zinc-800) */
+  --divider: rgba(39, 39, 42, 0.8);      /* (zinc-800/80) */
+
+  /* Resume Accent Button */
+  --resume-bg: rgba(249, 115, 22, 0.12);
+  --resume-border: rgba(249, 115, 22, 0.35);
+  --resume-text: #fb923c;      /* Bright readable orange (orange-400) */
+}
+
 body {
-  background-color: #0c0d0e;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-color: var(--bg-color);
+  background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
   background-size: 24px 24px;
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Helper token classes */
+.c-primary { color: var(--text-primary); }
+.c-secondary { color: var(--text-secondary); }
+.c-muted { color: var(--text-muted); }
+.c-accent { color: var(--text-accent); }
+.border-theme { border-color: var(--divider); }
+
+.btn-nav {
+  background-color: var(--surface-btn);
+  border: 1px solid var(--btn-border);
+  color: var(--text-secondary);
+}
+.btn-nav:hover {
+  background-color: var(--surface-btn-hover);
+  color: var(--text-accent);
+  border-color: var(--btn-border);
+}
+
+.btn-resume {
+  background-color: var(--resume-bg);
+  border: 1px solid var(--resume-border);
+  color: var(--resume-text);
+}
+.btn-resume:hover {
+  background-color: rgba(234, 88, 12, 0.18);
 }
